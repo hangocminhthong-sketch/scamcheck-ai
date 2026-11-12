@@ -1,9 +1,8 @@
 name: Deploy AI backend (Cloudflare Worker)
 
+# Manual: Actions → "Deploy AI backend" → Run workflow (needs the 3 secrets below).
+# The live backend was first deployed from the Cloudflare dashboard (see README).
 on:
-  push:
-    branches: [main]
-    paths: ['worker/**', '.github/workflows/deploy-worker.yml']
   workflow_dispatch:
 
 jobs:
