@@ -16,7 +16,7 @@ gives an answer and leans towards caution. Available in English and Vietnamese. 
 
 **Live AI backend:** `https://scamcheck-api.hangocminhthong.workers.dev` (health: `/health`)
 **Android APK:** GitHub → Actions → latest "Test & build Android APK" run → artifact `scamcheck-ai-debug-apk`
-**Demo video (2–3 min):** _ADD LINK HERE_ (script: [docs/demo-video-script.md](docs/demo-video-script.md))
+**Demo video (2:20):** [docs/demo/ScamCheck-AI-demo.mp4](docs/demo/ScamCheck-AI-demo.mp4). It was recorded automatically from the real app build by [docs/demo/record_demo.py](docs/demo/record_demo.py). AI answers are the verbatim replies of the live backend, replayed with their measured latency; the offline scene runs with no AI at all.
 
 ---
 
@@ -43,7 +43,7 @@ gives an answer and leans towards caution. Available in English and Vietnamese. 
 | 🔍 | **Check text or links.** Paste, or tap an example. |
 | 📤 | **Share-sheet check.** Share a message from Messages, Zalo or Gmail → "Check with ScamCheck" → auto-check. |
 | 🖼️ | **Screenshot check.** Claude reads the image; no OCR library needed. |
-| ⚖️ | **Hybrid verdict.** Claude + 14 on-device rule families (urgency, OTP requests, money requests, impersonation, look-alike, shortened and risky links, APK/remote-access…). The higher risk wins. |
+| ⚖️ | **Hybrid verdict.** Claude + 16 on-device scam signals (urgency, OTP requests, money requests, impersonation, look-alike, shortened and risky links, APK/remote-access…). The higher risk wins. |
 | 📋 | **Explained result.** Risk meter, scam type, red flags with quoted evidence, "what to do now", disclaimer. The app never says "100% safe". |
 | 📴 | **Works offline.** On-device check, clearly labelled. |
 | 🚩 | **Feedback + in-app report** (Google Play AI-generated content policy). |
@@ -159,7 +159,7 @@ We followed the method from Apero's sessions: **wiki → loop → harness**.
 - [x] Push to GitHub; CI builds the APK
 - [ ] Install the APK on a phone → test the share sheet from Messages/Zalo and the ad banner
 - [ ] Optional: Firebase project + `GOOGLE_SERVICES_JSON_B64` → check events in DebugView
-- [ ] Record the demo video ([script](docs/demo-video-script.md)) and paste the link above
+- [x] Demo video recorded (docs/demo/ScamCheck-AI-demo.mp4)
 - [ ] Fill in the team table below → share the repo with the instructor and Apero → submit on Canvas
 
 ## 8. Team

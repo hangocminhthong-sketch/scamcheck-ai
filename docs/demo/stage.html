@@ -1,0 +1,54 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>ScamCheck AI demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; }
+  body { font-family: Inter, system-ui, sans-serif; background: radial-gradient(circle at 25% 30%, #22357a 0%, #0f1a3d 55%, #0a1128 100%); color: #fff; }
+  .phone { position: absolute; left: 230px; top: 50%; transform: translateY(-50%); width: 430px; height: 920px;
+           border-radius: 54px; background: #05070f; padding: 14px; box-shadow: 0 40px 120px rgba(0,0,0,.55), 0 0 0 2px #2b3566; }
+  .screen { width: 402px; height: 892px; border-radius: 42px; overflow: hidden; background: #f4f6fb; position: relative; }
+  .screen iframe { width: 390px; height: 866px; border: 0; transform: scale(1.0308); transform-origin: 0 0; }
+  .net { position: absolute; left: 50%; transform: translateX(-50%); bottom: 10px; font-size: 13px; color: #94a3b8; white-space: nowrap; }
+  .panel { position: absolute; left: 780px; top: 0; width: 1040px; height: 1080px; display: flex; flex-direction: column; justify-content: center; gap: 26px; }
+  .step { font-size: 22px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8ea2ff; }
+  .title { font-size: 64px; font-weight: 800; line-height: 1.08; letter-spacing: -.02em; }
+  .sub { font-size: 30px; line-height: 1.45; color: #cbd5f5; max-width: 960px; }
+  .chips { display: flex; gap: 12px; flex-wrap: wrap; }
+  .chip { font-size: 22px; padding: 10px 18px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); }
+  .fade { transition: opacity .45s ease, transform .45s ease; }
+  .hide { opacity: 0; transform: translateY(14px); }
+  .card { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; text-align: center;
+          background: radial-gradient(circle at 50% 35%, #2546b8 0%, #0f1a3d 60%, #0a1128 100%); z-index: 5; transition: opacity .6s ease; }
+  .card.off { opacity: 0; pointer-events: none; }
+  .card h1 { font-size: 96px; font-weight: 800; letter-spacing: -.03em; }
+  .card p { font-size: 34px; color: #cbd5f5; max-width: 1300px; line-height: 1.45; }
+  .stats { display: flex; gap: 36px; margin-top: 10px; }
+  .stat { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 22px; padding: 26px 34px; min-width: 300px; }
+  .stat b { display: block; font-size: 64px; font-weight: 800; color: #ffd166; }
+  .stat span { font-size: 22px; color: #cbd5f5; }
+  .small { font-size: 22px !important; color: #94a3b8 !important; }
+  .logo { width: 120px; height: 120px; }
+</style></head>
+<body>
+  <div class="phone"><div class="screen"><iframe id="app" src="./index.html"></iframe></div></div>
+  <div class="panel">
+    <div class="step fade" id="step"></div>
+    <div class="title fade" id="title"></div>
+    <div class="sub fade" id="sub"></div>
+    <div class="chips fade" id="chips"></div>
+  </div>
+  <div class="card off" id="card"></div>
+<script>
+  const $ = (id) => document.getElementById(id);
+  window.caption = (step, title, sub = '', chips = []) => {
+    for (const id of ['step', 'title', 'sub', 'chips']) $(id).classList.add('hide');
+    setTimeout(() => {
+      $('step').textContent = step; $('title').innerHTML = title; $('sub').innerHTML = sub;
+      $('chips').innerHTML = chips.map((c) => `<span class="chip">${c}</span>`).join('');
+      for (const id of ['step', 'title', 'sub', 'chips']) $(id).classList.remove('hide');
+    }, 450);
+  };
+  window.showCard = (html) => { $('card').innerHTML = html; $('card').classList.remove('off'); };
+  window.hideCard = () => $('card').classList.add('off');
+</script>
+</body></html>
