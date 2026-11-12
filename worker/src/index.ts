@@ -140,7 +140,6 @@ export async function callClaude(env: Env, req: AnalyzeRequest, fetchImpl: typeo
     body: JSON.stringify({
       model: env.MODEL || 'claude-haiku-5-5',
       max_tokens: 900,
-      temperature: 0,
       system: SYSTEM_PROMPT.replace('LANGUAGE', req.lang === 'vi' ? 'Vietnamese' : 'English'),
       messages: [{ role: 'user', content }],
     }),

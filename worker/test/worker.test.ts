@@ -42,6 +42,8 @@ describe('Worker /v1/analyze', () => {
     expect(JSON.stringify(body)).not.toContain('SECRET');
     // Untrusted message is wrapped in <message> tags.
     expect(String(init.body)).toContain('<message>');
+    // claude-haiku-5-5 rejects `temperature` ("deprecated for this model") — never send it.
+    expect(JSON.parse(String(init.body))).not.toHaveProperty('temperature');
   });
 
   it('accepts JSON wrapped in ```json fences', async () => {

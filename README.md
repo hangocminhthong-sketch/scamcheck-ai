@@ -14,6 +14,8 @@ gives an answer and leans towards caution. Available in English and Vietnamese. 
 |---|---|---|---|
 | ![](docs/screenshots/03-home-filled.png) | ![](docs/screenshots/04-result-likely-scam.png) | ![](docs/screenshots/11-result-vi-offline.png) | ![](docs/screenshots/09-history.png) |
 
+**Live AI backend:** `https://scamcheck-api.hangocminhthong.workers.dev` (health: `/health`)
+**Android APK:** GitHub → Actions → latest "Test & build Android APK" run → artifact `scamcheck-ai-debug-apk`
 **Demo video (2–3 min):** _ADD LINK HERE_ (script: [docs/demo-video-script.md](docs/demo-video-script.md))
 
 ---
@@ -145,14 +147,17 @@ We followed the method from Apero's sessions: **wiki → loop → harness**.
 **What didn't work / limits**
 - The build environment could not reach Google's Android SDK servers, so native Kotlin + Gradle was impossible locally.
   We switched to Capacitor (ADR 001) and moved the APK build to GitHub Actions.
-- The live Claude call is covered by contract tests (mocked responses, including malformed ones). Prompt quality
-  must be checked by hand with a real key before the demo (see the checklist below).
+- Mocked contract tests did not catch that the live model rejects the `temperature` parameter. Every real call failed
+  until a live smoke test exposed it. We fixed it, added a contract test, and logged the rule in `learned.md`.
+  Live smoke test after the fix: 5/5 correct verdicts in about 2 s, including a Vietnamese bank-OTP scam and a
+  prompt-injection attempt ("ignore all previous instructions…"), which was flagged as a scam.
 - Rule-based detection needs constant upkeep as scams change. Round 2 should use `result_reported` and 👎 rates to tune it.
 
 ## 7. Before submitting (team checklist)
-- [ ] Deploy the Worker and set `VITE_API_URL` (repo variable + `.env.local`)
-- [ ] Try 10 real scam and non-scam messages (EN + VI) with the live AI; note any wrong verdicts in `wiki/log.md`
-- [ ] Push to GitHub → download the APK artifact → install on a phone → test the share sheet from Messages/Zalo
+- [x] Deploy the Worker and set `VITE_API_URL` (done: repository variable)
+- [x] Live smoke test with real EN + VI messages (5/5 correct)
+- [x] Push to GitHub; CI builds the APK
+- [ ] Install the APK on a phone → test the share sheet from Messages/Zalo and the ad banner
 - [ ] Optional: Firebase project + `GOOGLE_SERVICES_JSON_B64` → check events in DebugView
 - [ ] Record the demo video ([script](docs/demo-video-script.md)) and paste the link above
 - [ ] Fill in the team table below → share the repo with the instructor and Apero → submit on Canvas

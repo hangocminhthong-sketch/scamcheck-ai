@@ -8,6 +8,10 @@
 - 2026-11-12 — E2E harness: 10 flows green, screenshots in docs/screenshots.
 - 2026-11-12 — Screenshot review found VN bank-staff scam under-flagged → test red → patterns fixed → green (learned.md).
 - 2026-11-12 — verify.sh green. F1–F10 passing, F11 claimed (needs a device).
+- 2026-11-12 — Repo pushed to GitHub (private). CI built the APK successfully, so the Android code compiles.
+- 2026-11-12 — Worker live at https://scamcheck-api.hangocminhthong.workers.dev (deployed from the Cloudflare dashboard).
+  Removed `temperature` (rejected by the model). Live smoke test: 5/5 correct verdicts (EN delivery phishing, VN bank-OTP,
+  VN family message, real Chase OTP notice, prompt-injection + USDT) in ~1.7–2.7 s.
 
 ## Open questions
 - Which Firebase project / AdMob account will Apero use at publishing? (Using placeholders + test IDs.)
