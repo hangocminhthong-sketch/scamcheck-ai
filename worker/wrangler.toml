@@ -1,0 +1,16 @@
+name = "scamcheck-api"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+MODEL = "claude-haiku-5-5"
+ALLOWED_ORIGIN = "*"
+
+# Secret (never commit):  npx wrangler secret put ANTHROPIC_API_KEY
+
+# Optional per-device rate limit (60 requests / 60 s). Uncomment after creating it in the dashboard.
+# [[unsafe.bindings]]
+# name = "RATE_LIMITER"
+# type = "ratelimit"
+# namespace_id = "1001"
+# simple = { limit = 60, period = 60 }

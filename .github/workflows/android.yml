@@ -1,0 +1,69 @@
+name: Test & build Android APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    env:
+      # Set these in GitHub → Settings → Secrets and variables → Actions → Variables
+      VITE_API_URL: ${{ vars.VITE_API_URL }}
+      VITE_ADMOB_BANNER_ID: ${{ vars.VITE_ADMOB_BANNER_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            app/package-lock.json
+            worker/package-lock.json
+
+      - name: Install
+        run: |
+          npm ci --prefix app
+          npm ci --prefix worker
+
+      - name: Unit + worker tests
+        run: |
+          npm test --prefix app
+          npm test --prefix worker
+
+      - name: Firebase config (optional)
+        env:
+          GOOGLE_SERVICES_JSON_B64: ${{ secrets.GOOGLE_SERVICES_JSON_B64 }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON_B64" ]; then
+            echo "$GOOGLE_SERVICES_JSON_B64" | base64 -d > app/android/app/google-services.json
+            echo "VITE_FIREBASE_ENABLED=true" >> "$GITHUB_ENV"
+            echo "Firebase enabled"
+          else
+            echo "No Firebase config: analytics stays in debug mode"
+          fi
+
+      - name: Build web + sync Capacitor
+        working-directory: app
+        run: |
+          npm run build
+          npx cap sync android
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build debug APK
+        working-directory: app/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scamcheck-ai-debug-apk
+          path: app/android/app/build/outputs/apk/debug/*.apk

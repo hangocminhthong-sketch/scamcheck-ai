@@ -1,0 +1,11 @@
+{
+  "appId": "com.scamcheck.ai",
+  "appName": "ScamCheck AI",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "FirebaseAnalytics": {}
+  }
+}
