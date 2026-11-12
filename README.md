@@ -160,15 +160,17 @@ We followed the method from Apero's sessions: **wiki → loop → harness**.
 - [ ] Install the APK on a phone → test the share sheet from Messages/Zalo and the ad banner
 - [ ] Optional: Firebase project + `GOOGLE_SERVICES_JSON_B64` → check events in DebugView
 - [x] Demo video recorded (docs/demo/ScamCheck-AI-demo.mp4)
-- [ ] Fill in the team table below → share the repo with the instructor and Apero → submit on Canvas
+- [x] Team table filled in
+- [ ] Share the repo with the instructor and Apero → submit on Canvas
 
 ## 8. Team
 | Member | Role | Contributions |
 |---|---|---|
-| _Name_ | Product lead (PM) | Idea selection, wiki/spec review, README, demo video |
-| _Name_ | AI / backend | Worker deploy, prompt testing with real scam samples |
-| _Name_ | Mobile / QA | APK build, on-device testing (share sheet, ads, Firebase DebugView) |
-| _Name_ | Growth / data | Tracking plan, Play listing copy, Round 2 analysis plan |
+| Hà Ngọc Minh Thông | Product lead (PM) | Market research and idea selection (RICE + Apero fit), wiki/spec and Done-when checklists, AI-native workflow with Claude, GitHub + Cloudflare deployment, README |
+| Hoàng Tuấn Linh | AI / backend | Cloudflare Worker and Claude prompt, JSON validation, live smoke tests with real EN/VI scam messages |
+| Nguyễn Ngọc Mai | Mobile & QA | Capacitor Android app, share-sheet intent, CI APK build, E2E test harness and on-device testing |
+| Nguyễn Phan Quỳnh Như | Data & growth | Tracking plan (18 events, 5-metric scorecard), Firebase setup, Round 2 analysis and A/B plan |
+| Tăng Hoàng Thảo Nhi | UX & content | UI design, Vietnamese/English copy, onboarding, privacy policy and Play Data-safety answers, demo video |
 
 ## 9. Sources
 - GASA & Feedzai, *Global State of Scams 2025*: gasa.org, feedzai.com/global-state-of-scams-report-2025
