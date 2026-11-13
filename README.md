@@ -15,6 +15,7 @@ gives an answer and leans towards caution. Available in English and Vietnamese. 
 | ![](docs/screenshots/03-home-filled.png) | ![](docs/screenshots/04-result-likely-scam.png) | ![](docs/screenshots/11-result-vi-offline.png) | ![](docs/screenshots/09-history.png) |
 
 **Web app (iPhone / any browser):** https://hangocminhthong-sketch.github.io/scamcheck-ai/ (on iPhone: Safari → Share → Add to Home Screen)
+**How it works (technical note, PDF):** [docs/ScamCheck-AI-How-It-Works.pdf](docs/ScamCheck-AI-How-It-Works.pdf)
 **Live AI backend:** `https://scamcheck-api.hangocminhthong.workers.dev` (health: `/health`)
 **Android APK:** GitHub → Actions → latest "Test & build Android APK" run → artifact `scamcheck-ai-debug-apk`
 **Demo video (2:20):** [docs/demo/ScamCheck-AI-demo.mp4](docs/demo/ScamCheck-AI-demo.mp4). It was recorded automatically from the real app build by [docs/demo/record_demo.py](docs/demo/record_demo.py). AI answers are the verbatim replies of the live backend, replayed with their measured latency; the offline scene runs with no AI at all.
